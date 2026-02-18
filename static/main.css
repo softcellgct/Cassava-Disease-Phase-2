@@ -11,30 +11,40 @@
 
 :root {
   --primary-color: #007AF3;
+  --secondary-color: #F9FAFB;
+  --accent-color: #00C9A7;
+  --danger-color: #E74C3C;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --radius: 1.2em;
+  --transition: 0.2s cubic-bezier(.4,0,.2,1);
 }
 
 body {
-  background: #F2F2F2;
+  background: var(--secondary-color);
   margin: 0;
-  font-family: poppins;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #222;
 }
 
 .navbar {
   background: white;
-  padding: 1em;
+  padding: 1.5em 2em;
+  box-shadow: var(--shadow);
 }
 
 .navbar .nav-heading {
   text-decoration: none;
-  font-weight: bolder;
-  color: black;
-  font-size: 1.8em;
-  font-family: oswald;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 2.2em;
+  font-family: 'Oswald', Arial, sans-serif;
+  letter-spacing: 1px;
+  transition: color var(--transition);
   padding-top: .2em;
 }
 
 .navbar .nav-heading span {
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 .navbar nav {
@@ -42,10 +52,9 @@ body {
 }
 
 .navbar .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  place-content: space-between;
+  justify-content: space-between;
+  align-items: center;
 }
 
 section.hero {
@@ -54,8 +63,11 @@ section.hero {
 
 section.hero div.container {
   background-image: url("{{url_for('static', filename='images/cassava-leaf2.jpg')}}");
-  padding-top: 1em;
-  padding-bottom: .5em;
+  padding: 2.5em 0 1.5em 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 2em auto 1.5em auto;
+  max-width: 900px;
 }
 
 section.hero .subheading {
@@ -66,11 +78,13 @@ section.hero .subheading {
 }
 
 section.hero .main-heading {
-  font-size: 6.5em;
-  font-family: 'Booter - Zero Zero';
+  font-size: 4em;
+  font-family: 'Booter - Zero Zero', 'Oswald', Arial, sans-serif;
   margin-top: .2em;
   color: #1d0200;
   padding-bottom: .1em;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 section.hero-input {
@@ -79,22 +93,31 @@ section.hero-input {
 }
 
 section.hero-input div.main-div {
-  padding: 0;
+  padding: 2em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 section.hero-input div.main-div h2 {
-  font-size: 3em;
-  font-family: Metal Mania;
+  font-size: 2.2em;
+  font-family: 'Oswald', Arial, sans-serif;
+  color: var(--primary-color);
+  margin-bottom: 1em;
 }
 
 section.hero-input div.main-div input {
-  padding: .8em;
-  width: 50%;
-  margin-bottom: 2em;
-  border: 1px solid;
-  border-radius: 1em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  padding: 1em;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.5em;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  font-size: 1.1em;
+  background: #fff;
+  transition: border var(--transition);
+  box-shadow: var(--shadow);
 }
 
 section.hero-input div.main-div .input-btn {
@@ -102,12 +125,35 @@ section.hero-input div.main-div .input-btn {
 }
 
 section.hero-input div.main-div .predict-btn {
-  background-color: var(--primary-color);
-  font-size: 1.3em;
-  font-weight: bold;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: 700;
   border: none;
-  border-radius: 5em;
-  width: 50%;
+  border-radius: 2em;
+  width: 100%;
+  max-width: 400px;
+  padding: 1em 0;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  letter-spacing: 1px;
+  outline: none;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+section.hero-input div.main-div .predict-btn:hover {
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,122,243,0.15);
 }
 
 footer {
@@ -369,36 +415,49 @@ section.about footer a:hover {
 
 div.prediction {
   text-align: center;
-  background-color: #F2F2F2;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 2em auto;
+  max-width: 500px;
+  padding: 2em 1.5em 2.5em 1.5em;
 }
 
 div.prediction h1 {
-  font-size: 5em;
-  font-family: 'Booter - Zero Zero';
+  font-size: 2.5em;
+  font-family: 'Oswald', Arial, sans-serif;
+  color: var(--primary-color);
+  margin-bottom: 1em;
 }
 
 div.prediction .predicted-class h2 {
-  font-size: 2em;
-  font-family: Metal Mania;
+  font-size: 1.3em;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #222;
+  margin: 0.5em 0;
 }
 
 div.prediction .retry {
-  font-size: 2em;
-  font-family: Metal Mania;
-  padding: 1em;
+  font-size: 1.1em;
+  font-family: 'Oswald', Arial, sans-serif;
+  padding: 1em 0 0 0;
   text-align: center;
 }
 
 div.prediction .retry a {
   text-decoration: none;
-  background: var(--primary-color);
-  padding: .2em;
-  border-radius: 3em;
-  color: black;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  padding: .5em 2em;
+  border-radius: 2em;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: background var(--transition), color var(--transition);
 }
 
 div.prediction .retry a:hover {
-  color: white;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
 }
 
 div.false-predicted-class h2 {

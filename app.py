@@ -43,7 +43,12 @@ def home_page():
                 # prediction
                 pred, pred_proba = process_predict(file_path, model)
                 if pred_proba > 45:
-                  return render_template('prediction.html', prediction=pred, prediction_probability=pred_proba)
+                  return render_template(
+                      'prediction.html',
+                      prediction=pred,
+                      prediction_probability=pred_proba,
+                      image_filename=filename
+                  )
                 else:
                     return render_template('false_pred.html')  
   return render_template("index.html")
