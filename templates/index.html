@@ -40,6 +40,15 @@
                     <label for="ImageUpload" class="image-unpload">
                     </label>
                     <input class="input-btn" type="file" name="file" id="ImageUpload" accept=".png, .jpg, .jpeg">
+                    
+                    <!-- Image Preview -->
+                    <div id="preview-container" style="display: none; margin-top: 20px; text-align: center;">
+                        <h3 style="color: #007AF3; margin-bottom: 15px;">Image Preview</h3>
+                        <img id="preview-image" src="" alt="Preview" style="max-width: 300px; max-height: 300px; border-radius: 1.2em; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-bottom: 15px;">
+                        <p id="file-info" style="color: #666; font-size: 0.9em; margin-bottom: 15px;"></p>
+                        <button type="button" id="clear-btn" style="background: #E74C3C; color: white; border: none; padding: 8px 16px; border-radius: 0.8em; cursor: pointer; margin-bottom: 15px; font-weight: 600;">Change Image</button>
+                    </div>
+                    
                     <input type="submit" class="predict-btn" value="Predict">
                 </form>
             </div>
@@ -73,6 +82,52 @@
             mobileBtnExit.addEventListener('click', () => {
                 nav.classList.remove('menu-btn');
             })
+
+            // Image Preview Functionality
+            const imageInput = document.getElementById('ImageUpload');
+            const previewContainer = document.getElementById('preview-container');
+            const previewImage = document.getElementById('preview-image');
+            const fileInfo = document.getElementById('file-info');
+            const clearBtn = document.getElementById('clear-btn');
+
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    // Validate file type
+                    const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+                    if (!validTypes.includes(file.type)) {
+                        alert('Please upload a PNG or JPG image');
+                        imageInput.value = '';
+                        previewContainer.style.display = 'none';
+                        return;
+                    }
+
+                    // Validate file size (5MB max)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size must be less than 5MB');
+                        imageInput.value = '';
+                        previewContainer.style.display = 'none';
+                        return;
+                    }
+
+                    // Read and display file
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        previewImage.src = event.target.result;
+                        fileInfo.innerHTML = `<strong>File:</strong> ${file.name} | <strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB`;
+                        previewContainer.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Clear/Change Image Button
+            clearBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                imageInput.value = '';
+                previewContainer.style.display = 'none';
+            });
         </script>
 
 </body>
